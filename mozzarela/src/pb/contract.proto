@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+message Empty {}
+
+message Order {
+  int32 id = 1;
+  int32 userId = 2;
+  string name = 3;
+  string description = 4;
+  string createdAt = 5;
+  string price = 6;
+  bool finished = 7;
+}
+
+message Orders {
+  repeated Order orders = 1;
+}
+
+message CreateOrderParams {
+  string name = 1;
+  string description = 2;
+  int32 price = 3;
+  string accessToken = 4;
+}
+
+message FinishOrderParams {
+  string id = 1;
+  string accessToken = 2;
+}
+
+message FetchByUserParams {
+  string accessToken = 1;
+}
+
+service MozzarellaService {
+  rpc createOrder(CreateOrderParams) returns (Order);
+  rpc fetchByUser(FetchByUserParams) returns (Orders);
+  rpc finishOrder(FinishOrderParams) returns (Order);
+}
