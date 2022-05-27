@@ -1,6 +1,5 @@
 const grpc = require("grpc");
 const protoLoader = require("@grpc/proto-loader");
-const { promisifyAll } = require("grpc-promise");
 
 const defaultConfigs = {
   keepCase: true,
@@ -24,12 +23,8 @@ function connectGRPServer(params) {
   const packageDefinition = protoLoader.loadSync(protoFilePath, config);
 
   const proto = grpc.loadPackageDefinition(packageDefinition);
-
-  const serviceConstructor = proto[service];
-  const client = new serviceConstructor(`${host}:${port}`, credentials);
-  promisifyAll(client);
-
-  return client;
+  const ServiceConstructor = proto[service];
+  return new ServiceConstructor(`${host}:${port}`, credentials);
 }
 
 module.exports = { connectGRPServer, defaultConfigs };

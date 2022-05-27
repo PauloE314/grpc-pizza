@@ -1,4 +1,5 @@
 const path = require("path");
+const { promisify } = require("util");
 const { connectGRPServer } = require("../lib/grpc");
 
 const tomatoConfig = {
@@ -12,7 +13,9 @@ class TomatoService {
 
   static async validateToken(token) {
     try {
-      return await this.client.validateToken().sendMessage({ token });
+      return await promisify(this.client.validateToken.bind(this.client))({
+        token,
+      });
     } catch (error) {
       return false;
     }

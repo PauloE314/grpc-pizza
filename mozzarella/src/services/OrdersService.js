@@ -9,7 +9,7 @@ class OrdersService {
     return OrdersRepository.fetchByUser(userId);
   }
 
-  static async finish(id) {
+  static async finishOrder(id) {
     const order = await OrdersRepository.fetch(id);
     if (!order || order.finished) return;
 

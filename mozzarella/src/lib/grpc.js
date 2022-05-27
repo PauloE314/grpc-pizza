@@ -1,6 +1,5 @@
 const grpc = require("grpc");
 const protoLoader = require("@grpc/proto-loader");
-const { promisifyAll } = require("grpc-promise");
 
 const defaultConfigs = {
   keepCase: true,
@@ -27,7 +26,6 @@ function connectGRPServer(params) {
 
   const serviceConstructor = proto[service];
   const client = new serviceConstructor(`${host}:${port}`, credentials);
-  promisifyAll(client);
 
   return client;
 }
