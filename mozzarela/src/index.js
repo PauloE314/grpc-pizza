@@ -1,16 +1,15 @@
 if (process.env.NODE_ENV !== "production") require("dotenv").config();
 
 const grpc = require("grpc");
-const protoLoader = require("@grpc/proto-loader");
 const { applyDefinitions } = require("./interface/grpc/definition");
 
-function grpcServer(host, port) {
+function grpcServer(port) {
   const server = new grpc.Server();
 
   applyDefinitions(server);
 
-  server.bind(`${host}:${port}`);
+  server.bind(`0.0.0.0:${port}`, grpc.ServerCredentials.createInsecure());
   server.start();
 }
 
-grpcServer(process.env.HOST, process.env.PORT);
+grpcServer(process.env.PORT);
