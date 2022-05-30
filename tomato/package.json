@@ -5,8 +5,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/index.js",
-    "run": "node ./src/index.js",
-    "knex": "knex --knexfile ./src/db/knexfile.js"
+    "start": "node ./src/index.js",
+    "knex": "knex --knexfile ./src/db/knexfile.js",
+    "migrate": "knex --knexfile ./src/db/knexfile.js migrate:latest"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.6.7",

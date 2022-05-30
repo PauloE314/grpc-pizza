@@ -8,11 +8,11 @@ const { errorHandler } = require("./errors");
 const routes = Router();
 
 routes.post("/users/", UsersController.create);
-routes.post("/users/login", UsersController.login);
 routes.get("/users/orders", OrdersController.fetchUserOrders);
+routes.post("/auth/login", UsersController.login);
 
 routes.post("/orders/", OrdersController.create);
-routes.put("/orders/:id", OrdersController.finishOrder);
+routes.put("/orders/:id/finish", OrdersController.finishOrder);
 
 routes.use(errorHandler);
 
