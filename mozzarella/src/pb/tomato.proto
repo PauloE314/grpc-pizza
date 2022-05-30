@@ -15,7 +15,7 @@ message User {
 message Credentials {
   string token = 1;
   User user = 2;
-  int64 expiresIn = 3;
+  int64 expires_in = 3;
 }
 
 message CreateUserRequest {

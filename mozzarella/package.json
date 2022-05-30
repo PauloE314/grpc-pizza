@@ -7,11 +7,13 @@
     "dev": "nodemon src/index.js",
     "start": "node ./src/index.js",
     "knex": "knex --knexfile ./src/db/knexfile.js",
-    "migrate": "knex --knexfile ./src/db/knexfile.js migrate:latest"
+    "migrate": "knex --knexfile ./src/db/knexfile.js migrate:latest",
+    "build": "mkdir ./src/pb/codegen -p && grpc_tools_node_protoc --js_out=import_style=commonjs,binary:./src/pb/codegen --grpc_out=grpc_js:./src/pb/codegen -I=./src/pb/ ./src/pb/*.proto"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.6.7",
-    "@grpc/proto-loader": "^0.6.12",
+    "google-protobuf": "^3.20.1",
+    "grpc-tools": "^1.11.2",
     "knex": "^2.0.0",
     "nodemon": "^2.0.16",
     "pino": "^7.11.0",
