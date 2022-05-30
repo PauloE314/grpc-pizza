@@ -1,5 +1,5 @@
 const { status } = require("@grpc/grpc-js");
-const messages = require("../../../pb/contract_pb");
+const messages = require("../../../pb/codegen/contract_pb");
 const { UserService } = require("../../../services/UsersService");
 
 class UsersController {

@@ -1,4 +1,4 @@
-const { TomatoServiceService } = require("../../pb/contract_grpc_pb");
+const { TomatoServiceService } = require("../../pb/codegen/contract_grpc_pb");
 const { UsersController } = require("./controllers/UsersController");
 const {
   AuthenticationController,

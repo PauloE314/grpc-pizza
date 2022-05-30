@@ -8,7 +8,7 @@
     "start": "node ./src/index.js",
     "knex": "knex --knexfile ./src/db/knexfile.js",
     "migrate": "knex --knexfile ./src/db/knexfile.js migrate:latest",
-    "build": "grpc_tools_node_protoc --js_out=import_style=commonjs,binary:./src/pb --grpc_out=grpc_js:./src/pb -I=./src/pb/ ./src/pb/*.proto"
+    "build": "mkdir ./src/pb/codegen -p && grpc_tools_node_protoc --js_out=import_style=commonjs,binary:./src/pb/codegen --grpc_out=grpc_js:./src/pb/codegen -I=./src/pb/ ./src/pb/*.proto"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.6.7",
