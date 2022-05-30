@@ -1,6 +1,11 @@
 syntax = "proto3";
 
-message Empty {}
+
+service TomatoService {
+  rpc createUser(CreateUserRequest) returns (CreateUserResponse);
+  rpc login(LoginRequest) returns (LoginResponse);
+  rpc validateToken(ValidationRequest) returns (ValidationResponse);
+}
 
 message User {
   int32 id = 1;
@@ -13,22 +18,28 @@ message Credentials {
   int64 expiresIn = 3;
 }
 
-message CreateUserParams {
+message CreateUserRequest {
   string name = 1;
   string password = 2;
 }
 
-message LoginParams {
+message CreateUserResponse {
+  User user = 1;
+}
+
+message LoginRequest {
   string name = 1;
   string password = 2;
 }
 
-message ValidationParams {
+message LoginResponse {
+  Credentials credentials = 1;
+}
+
+message ValidationRequest {
   string token = 1;
 }
 
-service TomatoService {
-  rpc createUser(CreateUserParams) returns (User);
-  rpc login(LoginParams) returns (Credentials);
-  rpc validateToken(ValidationParams) returns (Credentials);
+message ValidationResponse {
+  Credentials credentials = 1;
 }

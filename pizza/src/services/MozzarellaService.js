@@ -12,15 +12,27 @@ class MozzarellaService {
   static client = connectGRPServer(mozzarellaConfig);
 
   static async createOrder(params) {
-    return promisify(this.client.createOrder.bind(this.client))(params);
+    const { order } = await promisify(
+      this.client.createOrder.bind(this.client)
+    )(params);
+
+    return order;
   }
 
   static async finishOrder(params) {
-    return promisify(this.client.finishOrder.bind(this.client))(params);
+    const { order } = await promisify(
+      this.client.finishOrder.bind(this.client)
+    )(params);
+
+    return order;
   }
 
   static async fetchByUser(params) {
-    return promisify(this.client.fetchByUser.bind(this.client))(params);
+    const { orders } = await promisify(
+      this.client.fetchByUser.bind(this.client)
+    )(params);
+
+    return orders;
   }
 }
 

@@ -12,11 +12,19 @@ class TomatoService {
   static client = connectGRPServer(tomatoConfig);
 
   static async createUser(params) {
-    return promisify(this.client.createUser.bind(this.client))(params);
+    const { user } = await promisify(this.client.createUser.bind(this.client))(
+      params
+    );
+
+    return user;
   }
 
   static async login(params) {
-    return promisify(this.client.login.bind(this.client))(params);
+    const { credentials } = await promisify(
+      this.client.login.bind(this.client)
+    )(params);
+
+    return credentials;
   }
 }
 

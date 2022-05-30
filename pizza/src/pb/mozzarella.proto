@@ -1,6 +1,10 @@
 syntax = "proto3";
 
-message Empty {}
+service MozzarellaService {
+  rpc createOrder(CreateOrderRequest) returns (CreateOrderResponse);
+  rpc fetchByUser(FetchByUserRequest) returns (FetchByUserResponse);
+  rpc finishOrder(FinishOrderRequest) returns (FinishOrderResponse);
+}
 
 message Order {
   int32 id = 1;
@@ -16,24 +20,30 @@ message Orders {
   repeated Order orders = 1;
 }
 
-message CreateOrderParams {
+message CreateOrderRequest {
   string name = 1;
   string description = 2;
   int32 price = 3;
   string accessToken = 4;
 }
 
-message FinishOrderParams {
+message CreateOrderResponse {
+  Order order = 1;
+}
+
+message FetchByUserRequest {
+  string accessToken = 1;
+}
+
+message FetchByUserResponse {
+  repeated Order orders = 1;
+}
+
+message FinishOrderRequest {
   string id = 1;
   string accessToken = 2;
 }
 
-message FetchByUserParams {
-  string accessToken = 1;
-}
-
-service MozzarellaService {
-  rpc createOrder(CreateOrderParams) returns (Order);
-  rpc fetchByUser(FetchByUserParams) returns (Orders);
-  rpc finishOrder(FinishOrderParams) returns (Order);
+message FinishOrderResponse {
+  Order order = 1;
 }

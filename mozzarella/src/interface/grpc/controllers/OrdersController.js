@@ -10,7 +10,7 @@ class OrdersController {
       ...orderData,
     });
 
-    return callback(null, order);
+    return callback(null, { order });
   }
 
   static async fetchByUser(call, callback) {
@@ -23,7 +23,7 @@ class OrdersController {
     const { id } = call.request;
     const order = await OrdersService.finishOrder(id);
 
-    if (order) callback(null, order);
+    if (order) callback(null, { order });
     return callback({ code: status.INVALID_ARGUMENT });
   }
 }

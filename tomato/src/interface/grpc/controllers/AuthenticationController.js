@@ -7,7 +7,7 @@ class AuthenticationController {
   static async login(call, callback) {
     const credentials = await AuthenticationService.login(call.request);
 
-    if (credentials) return callback(null, credentials);
+    if (credentials) return callback(null, { credentials });
     else return callback({ code: status.PERMISSION_DENIED });
   }
 
@@ -15,7 +15,7 @@ class AuthenticationController {
     const { token } = call.request;
     const credentials = await AuthenticationService.validateToken(token);
 
-    if (credentials) return callback(null, credentials);
+    if (credentials) return callback(null, { credentials });
     else return callback({ code: status.PERMISSION_DENIED });
   }
 }

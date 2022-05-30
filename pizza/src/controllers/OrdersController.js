@@ -17,7 +17,7 @@ class OrdersController {
 
   static async fetchUserOrders(req, res) {
     const { authorization } = req.headers;
-    const { orders } = await MozzarellaService.fetchByUser({
+    const orders = await MozzarellaService.fetchByUser({
       accessToken: authorization,
     });
 
