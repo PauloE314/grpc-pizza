@@ -9,8 +9,8 @@
     "knex": "knex --knexfile ./src/db/knexfile.js"
   },
   "dependencies": {
+    "@grpc/grpc-js": "^1.6.7",
     "@grpc/proto-loader": "^0.6.12",
-    "grpc": "^1.24.11",
     "knex": "^2.0.0",
     "nodemon": "^2.0.16",
     "pino": "^7.11.0",

@@ -1,4 +1,4 @@
-const { status } = require("grpc");
+const { status } = require("@grpc/grpc-js");
 const { TomatoService } = require("../../services/TomatoService");
 
 function authRequired(cb) {

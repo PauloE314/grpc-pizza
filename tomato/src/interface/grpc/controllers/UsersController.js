@@ -1,4 +1,4 @@
-const grpc = require("grpc");
+const { status } = require("@grpc/grpc-js");
 const { UserService } = require("../../../services/UsersService");
 
 class UsersController {
@@ -6,7 +6,7 @@ class UsersController {
     const user = await UserService.create(call.request);
 
     if (user) return callback(null, user);
-    else return callback({ code: grpc.status.ALREADY_EXISTS });
+    else return callback({ code: status.ALREADY_EXISTS });
   }
 }
 

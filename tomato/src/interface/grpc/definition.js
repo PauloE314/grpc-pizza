@@ -1,6 +1,6 @@
 const path = require("path");
 const protoLoader = require("@grpc/proto-loader");
-const { loadPackageDefinition, Server } = require("grpc");
+const { loadPackageDefinition } = require("@grpc/grpc-js");
 const { UsersController } = require("./controllers/UsersController");
 const {
   AuthenticationController,

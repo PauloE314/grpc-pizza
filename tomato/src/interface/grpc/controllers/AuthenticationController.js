@@ -1,4 +1,4 @@
-const { status } = require("grpc");
+const { status } = require("@grpc/grpc-js");
 const {
   AuthenticationService,
 } = require("../../../services/AuthenticationService");

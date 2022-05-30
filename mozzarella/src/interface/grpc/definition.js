@@ -1,6 +1,6 @@
 const path = require("path");
 const protoLoader = require("@grpc/proto-loader");
-const { loadPackageDefinition } = require("grpc");
+const { loadPackageDefinition } = require("@grpc/grpc-js");
 
 const { authRequired } = require("./auth");
 const { OrdersController } = require("./controllers/OrdersController");

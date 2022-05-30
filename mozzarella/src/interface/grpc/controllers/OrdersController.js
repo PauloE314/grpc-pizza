@@ -1,4 +1,4 @@
-const grpc = require("grpc");
+const { status } = require("@grpc/grpc-js");
 const { OrdersService } = require("../../../services/OrdersService");
 
 class OrdersController {
@@ -24,7 +24,7 @@ class OrdersController {
     const order = await OrdersService.finishOrder(id);
 
     if (order) callback(null, order);
-    return callback({ code: grpc.status.INVALID_ARGUMENT });
+    return callback({ code: status.INVALID_ARGUMENT });
   }
 }
 
