@@ -5,7 +5,9 @@ API Gateway that exposes the system features.
 ## Setup
 
 ```bash
+cp .env.example .env
 yarn install
+yarn build
 yarn start
 ```
 
