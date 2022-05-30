@@ -12,8 +12,12 @@ class Order {
   toJSON() {
     return {
       ...this,
-      price: `R$${this.price.toFixed(2).replace(".", ",")}`,
+      price: this.serializedPrice(),
     };
+  }
+
+  serializedPrice() {
+    return `R$${(this.price / 100).toFixed(2).replace(".", ",")}`;
   }
 }
 

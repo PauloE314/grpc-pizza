@@ -10,20 +10,20 @@ class OrdersController {
       ...orderData,
     });
 
-    return callback(null, { order });
+    return callback(null, { order: order.toJSON() });
   }
 
   static async fetchByUser(call, callback) {
     const { auth } = call;
     const orders = await OrdersService.fetchByUser(auth.user.id);
-    return callback(null, { orders });
+    return callback(null, { orders: orders.map((order) => order.toJSON()) });
   }
 
   static async finish(call, callback) {
     const { id } = call.request;
     const order = await OrdersService.finishOrder(id);
 
-    if (order) callback(null, { order });
+    if (order) callback(null, { order: order.toJSON() });
     return callback({ code: status.INVALID_ARGUMENT });
   }
 }

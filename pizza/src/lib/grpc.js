@@ -1,4 +1,4 @@
-const grpc = require("grpc");
+const { ChannelCredentials, loadPackageDefinition } = require("@grpc/grpc-js");
 const protoLoader = require("@grpc/proto-loader");
 
 const defaultConfigs = {
@@ -9,22 +9,16 @@ const defaultConfigs = {
   oneofs: true,
 };
 
-function connectGRPServer(params) {
-  const { protoFilePath, config, service, host, port, credentials } =
-    Object.assign(
-      {
-        host: "localhost",
-        config: defaultConfigs,
-        credentials: grpc.credentials.createInsecure(),
-      },
-      params
-    );
+function connectGRPServer({ host, protoFilePath, service, credentials }) {
+  credentials = credentials || ChannelCredentials.createInsecure();
 
-  const packageDefinition = protoLoader.loadSync(protoFilePath, config);
+  const packageDefinition = protoLoader.loadSync(protoFilePath, defaultConfigs);
+  const proto = loadPackageDefinition(packageDefinition);
 
-  const proto = grpc.loadPackageDefinition(packageDefinition);
   const ServiceConstructor = proto[service];
-  return new ServiceConstructor(`${host}:${port}`, credentials);
+  const client = new ServiceConstructor(host, credentials);
+
+  return client;
 }
 
-module.exports = { connectGRPServer, defaultConfigs };
+module.exports = { connectGRPServer };

@@ -3,7 +3,7 @@ const { promisify } = require("util");
 const { connectGRPServer } = require("../lib/grpc");
 
 const tomatoConfig = {
-  port: process.env.TOMATO_PORT,
+  host: process.env.TOMATO_HOST,
   protoFilePath: path.join(__dirname, "..", "pb", "tomato.proto"),
   service: "TomatoService",
 };

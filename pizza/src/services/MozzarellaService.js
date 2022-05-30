@@ -3,7 +3,7 @@ const { promisify } = require("util");
 const { connectGRPServer } = require("../lib/grpc");
 
 const mozzarellaConfig = {
-  port: process.env.MOZZARELLA_PORT,
+  host: process.env.MOZZARELLA_HOST,
   protoFilePath: path.join(__dirname, "..", "pb", "mozzarella.proto"),
   service: "MozzarellaService",
 };
