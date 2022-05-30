@@ -5,6 +5,7 @@ Authentication and Users system.
 ## Setup
 
 ```bash
+cp .env.example .env
 yarn install
 yarn migrate
 yarn start
