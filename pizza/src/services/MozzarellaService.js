@@ -1,15 +1,16 @@
 const path = require("path");
 const { promisify } = require("util");
-const { connectGRPServer } = require("../lib/grpc");
+const { ChannelCredentials } = require("@grpc/grpc-js");
+const { getPackageDefinition } = require("../lib/grpc");
 
-const mozzarellaConfig = {
-  host: process.env.MOZZARELLA_HOST,
-  protoFilePath: path.join(__dirname, "..", "pb", "mozzarella.proto"),
-  service: "MozzarellaService",
-};
+const protoPath = path.join(__dirname, "..", "pb", "mozzarella.proto");
+const MozzarellaClient = getPackageDefinition(protoPath).MozzarellaService;
 
 class MozzarellaService {
-  static client = connectGRPServer(mozzarellaConfig);
+  static client = new MozzarellaClient(
+    process.env.MOZZARELLA_HOST,
+    ChannelCredentials.createInsecure()
+  );
 
   static async createOrder(params) {
     const { order } = await promisify(

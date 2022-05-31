@@ -1,15 +1,16 @@
 const path = require("path");
 const { promisify } = require("util");
-const { connectGRPServer } = require("../lib/grpc");
+const { ChannelCredentials } = require("@grpc/grpc-js");
+const { getPackageDefinition } = require("../lib/grpc");
 
-const tomatoConfig = {
-  host: process.env.TOMATO_HOST,
-  protoFilePath: path.join(__dirname, "..", "pb", "tomato.proto"),
-  service: "TomatoService",
-};
+const protoPath = path.join(__dirname, "..", "pb", "tomato.proto");
+const TomatoClient = getPackageDefinition(protoPath).TomatoService;
 
 class TomatoService {
-  static client = connectGRPServer(tomatoConfig);
+  static client = new TomatoClient(
+    process.env.TOMATO_HOST,
+    ChannelCredentials.createInsecure()
+  );
 
   static async createUser(params) {
     const { user } = await promisify(this.client.createUser.bind(this.client))(
